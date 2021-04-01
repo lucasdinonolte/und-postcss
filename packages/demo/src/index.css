@@ -1,0 +1,14 @@
+@und-css-tokens;
+
+body {
+  font-size: var(--font-0);
+  color: red;
+}
+
+@media (--sm) {
+  h1 {
+    font-size: var(--font-4);
+  }
+}
+
+@und-css-utilities;

@@ -1,0 +1,14 @@
+{
+  "name": "@und-css/demo",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "postcss src/index.css -o dist/index.css"
+  },
+  "devDependencies": {
+    "@und-css/postcss-plugin": "^0.0.1",
+    "postcss": "^8.2.9",
+    "postcss-cli": "^8.3.1"
+  }
+}

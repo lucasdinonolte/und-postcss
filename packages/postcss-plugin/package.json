@@ -1,0 +1,11 @@
+{
+  "name": "@und-css/postcss-plugin",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "author": "Lucas Nolte <hello@lucas-nolte.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "postcss": "^8.2.9",
+    "postcss-custom-media": "^8.0.0"
+  }
+}

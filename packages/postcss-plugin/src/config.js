@@ -3,6 +3,7 @@ module.exports = {
     black: "#000000",
     red: "#FF0000",
     blue: "#0000FF",
+    active: "var(--color-blue)",
   },
   layout: {
     minWidth: 320,
@@ -19,18 +20,31 @@ module.exports = {
       xxxl: 4,
       xxxxl: 6,
     },
+    defaultSpacing: 1,
     spacingInterpolations: [
-      ['xs', 'sm'],
-      ['md', 'xxxl'],
     ],
   },
   typography: {
-    minSize: 16,
-    minRatio: 1.2,
-    maxSize: 20,
-    maxRatio: 1.33,
-    stepsAbove: 4,
-    stepsBelow: 2,
+    scale: {
+      minSize: 16,
+      minRatio: 1.2,
+      maxSize: 20,
+      maxRatio: 1.33,
+      stepsAbove: 4,
+      stepsBelow: 2,
+    },
+    leading: {
+      none: 1,
+      tight: 1.2,
+      normal: 1.4,
+      loose: 1.5,
+    },
+    tracking: {
+      tight: -0.01,
+      normal: 0,
+      wide: 0.01,
+      loose: 0.075,
+    },
   },
   namespaces: {
     layouts: 'o-',

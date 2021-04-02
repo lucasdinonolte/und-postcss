@@ -1,12 +1,7 @@
+const tokenValuesForNamespace = require('../util/tokenValuesForNamespace')
+
 module.exports = ({ config, tokens }) => {
   const utilities = config.utilities
-
-  const wrapInVar = (varName) => `var(${varName})`
-
-  const getValuesForNamespace = (_tokens, namespace) => {
-    return _tokens.filter((t) => t.namespace === namespace)
-      .map(({ name, variableName }) => ({ name, value: wrapInVar(variableName) }))
-  }
 
   const addUtility = (prefix, _properties, values) => {
     utilities.push({
@@ -16,14 +11,19 @@ module.exports = ({ config, tokens }) => {
     })
   }
 
-  const fontSizes = getValuesForNamespace(tokens, 'font')
-  const colors = getValuesForNamespace(tokens, 'color')
-  const spacings = getValuesForNamespace(tokens, 'space')
+  const fontSizes = tokenValuesForNamespace(tokens, 'font')
+  const lineHeights = tokenValuesForNamespace(tokens, 'leading')
+  const letterSpacings = tokenValuesForNamespace(tokens, 'tracking')
+  const colors = tokenValuesForNamespace(tokens, 'color')
+  const spacings = tokenValuesForNamespace(tokens, 'space')
 
   addUtility('text-', 'color', colors)
   addUtility('bg-', 'background-color', colors)
 
+
   addUtility('text-', 'font-size', fontSizes)
+  addUtility('leading-', 'line-height', lineHeights)
+  addUtility('tracking-', 'letter-spacing', letterSpacings)
 
   addUtility('p-', 'padding', spacings)
   addUtility('pt-', 'padding-top', spacings)

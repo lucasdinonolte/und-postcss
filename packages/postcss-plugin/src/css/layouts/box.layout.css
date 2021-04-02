@@ -1,0 +1,5 @@
+.box {
+  --box--spacing: var(--space-default);
+  display: block;
+  padding: var(--box--spacing);
+}

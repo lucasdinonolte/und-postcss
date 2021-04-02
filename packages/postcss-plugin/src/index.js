@@ -1,3 +1,5 @@
+const calculateRem = require('./util/calculateRem')
+
 const buildTokens = require('./generators/tokens')
 
 const defaultConfig = require('./config')
@@ -14,12 +16,13 @@ module.exports = (externalConfig = {}) => {
         importFrom: () => {
           const customMedia = {}
           Object.keys(config.breakpoints).forEach((bp) => {
-            customMedia[`--${bp}`] = config.breakpoints[bp]
+            customMedia[`--${bp}`] = `(min-width: ${calculateRem(config.breakpoints[bp])}rem)`
           })
 
           return { customMedia }
         }
       }),
+      require('postcss-nested')(),
     ]
   }
 }

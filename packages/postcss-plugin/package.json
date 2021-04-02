@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "postcss": "^8.2.9",
-    "postcss-custom-media": "^8.0.0"
+    "postcss-custom-media": "^8.0.0",
+    "postcss-nested": "^5.0.5"
   }
 }

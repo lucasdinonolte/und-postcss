@@ -34,9 +34,20 @@ module.exports = {
   },
   namespaces: {
     layouts: 'o-',
-    utilities: 'u-',
+    utilities: '',
   },
   breakpoints: {
-    sm: '(min-width: 30rem)',
+    sm: 520,
   },
+  utilities: [{
+    prefix: 'd',
+    properties: ['display'],
+    values: [{
+      name: 'n',
+      value: 'none',
+    }, {
+      name: 'f',
+      value: 'flex',
+    }],
+  }],
 }

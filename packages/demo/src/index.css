@@ -2,12 +2,17 @@
 
 body {
   font-size: var(--font-0);
-  color: red;
+  @media (--sm) {
+    color: red;
+  }
 }
 
 @media (--sm) {
   h1 {
     font-size: var(--font-4);
+    &:hover {
+      color: green;
+    }
   }
 }
 

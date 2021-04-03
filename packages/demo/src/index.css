@@ -6,6 +6,9 @@ body {
   @media (--sm) {
     color: red;
   }
+  @media (--lg) {
+    color: blue;
+  }
 }
 
 @media (--sm) {

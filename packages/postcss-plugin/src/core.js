@@ -1,4 +1,5 @@
 const calculateRem = require('./util/calculateRem')
+const escapeClassName = require('./util/escapeClassName')
 
 module.exports = (config) => {
   const tokens = []
@@ -44,7 +45,7 @@ module.exports = (config) => {
       utilities.forEach((utility) => {
         utility.values.forEach((value) => {
           const selector = `${namespaces.utilities}${utility.prefix}${value.name}`
-          utilityStyles.push(new Rule({ selector: `.${selector}` })
+          utilityStyles.push(new Rule({ selector: `.${escapeClassName(selector)}` })
             .append(
               utility.properties.map((prop) => {
                 return new Declaration({ prop, value: value.value })
@@ -55,7 +56,7 @@ module.exports = (config) => {
           if (utility.responsive) {
             breakpoints.forEach((bp) => {
               utilityStyles.push(new AtRule({ name: 'media', params: bp.value }).append(
-                new Rule({ selector: `.${bp.name}\\:${selector}` })
+                new Rule({ selector: `.${escapeClassName(`${bp.name}:${selector}`)}` })
                   .append(
                     utility.properties.map((prop) => {
                       return new Declaration({ prop, value: value.value })

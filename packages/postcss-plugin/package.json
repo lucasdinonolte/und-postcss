@@ -4,8 +4,12 @@
   "main": "src/index.js",
   "author": "Lucas Nolte <hello@lucas-nolte.com>",
   "license": "UNLICENSED",
+  "scripts": {
+    "test": "jest test/"
+  },
   "devDependencies": {
     "is-color": "^1.0.2",
+    "jest": "^26.4.2",
     "postcss": "^8.2.9",
     "postcss-custom-media": "^8.0.0",
     "postcss-nested": "^5.0.5"

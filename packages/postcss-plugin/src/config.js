@@ -70,5 +70,8 @@ module.exports = {
         }, 
       },
     }),
+    require('./generators/widths')({
+      '1/2': '50%',
+    }),
   ],
 }

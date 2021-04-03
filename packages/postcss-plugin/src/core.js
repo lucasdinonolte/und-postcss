@@ -23,7 +23,7 @@ module.exports = (config) => {
     addLayout: () => {
       // TODO
     },
-    addUtility: (prefix, _properties, values, responsive = false) => {
+    addUtility: (prefix, _properties, values, responsive = !!config.settings.responsiveUtilities) => {
       utilities.push({
         prefix,
         properties: Array.isArray(_properties) ? _properties : [_properties],

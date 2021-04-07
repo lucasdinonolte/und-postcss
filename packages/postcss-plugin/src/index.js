@@ -1,7 +1,16 @@
+const fs = require('fs')
+const path = require('path')
+
 const calculateRem = require('./util/calculateRem')
 const defaultConfig = require('./config')
 
-module.exports = (externalConfig = {}) => {
+module.exports = (_config = {}) => {
+  let externalConfig = _config
+  const externalConfigFile = path.join(process.cwd(), 'undcss.config.js')
+  if (fs.existsSync(externalConfigFile)) {
+    externalConfig = require(externalConfigFile)
+  }
+
   const config = Object.assign(defaultConfig, externalConfig)
   const undCss = require('./core')(config)
 

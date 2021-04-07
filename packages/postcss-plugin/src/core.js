@@ -1,3 +1,4 @@
+const { kebabCase } = require('lodash')
 const calculateRem = require('./util/calculateRem')
 const escapeClassName = require('./util/escapeClassName')
 
@@ -14,22 +15,55 @@ module.exports = (config) => {
     value: `(min-width: ${calculateRem(config.breakpoints[bp])}rem)`,
   }))
 
+  const addToken = (namespace, name, value) => {
+    const variableName = `--${!!namespace ? `${namespace}-` : ''}${name}`
+    tokens.push({ variableName, value, namespace, name })
+    return `var(${variableName})`
+  }
+
+  const addUtility = (prefix, _properties, values, responsive = !!config.settings.responsiveUtilities) => {
+    utilities.push({
+      prefix,
+      properties: Array.isArray(_properties) ? _properties : [_properties],
+      values,
+      responsive,
+    })
+  }
+
+  const resolveConfigTokens = (input, namespace = []) => {
+    if (typeof input !== 'object') return
+    Object.keys(input).forEach((key) => {
+      const value = Array.isArray(input[key]) ? input[key].join(', ') : input[key]
+      if (typeof value === 'object') {
+        resolveConfigTokens(value, [...namespace, key])
+      } else {
+        const kebabCasedNamespace = namespace.map((n) => kebabCase(n))
+        addToken(kebabCasedNamespace.join('-'), kebabCase(key), value)
+      }
+    })
+  }
+
+  const resolveConfigUtilities = (input) => {
+    if (typeof input !== 'object') return
+    Object.keys(input).forEach((prefix) => {
+      const utility = input[prefix]
+      const properties = utility.property || utility.properties
+      const values = Object.keys(utility.values).map((val) => ({
+        name: val, value: utility.values[val]
+      }))
+
+      addUtility(prefix, properties, values)
+    })
+  }
+
+  resolveConfigTokens(config.tokens || {})
+  resolveConfigUtilities(config.utilities || {})
+
   return {
-    addToken: (namespace, name, value) => {
-      const variableName = `--${namespace}-${name}`
-      tokens.push({ variableName, value, namespace, name })
-      return `var(${variableName})`
-    },
+    addToken,
+    addUtility,
     addLayout: () => {
       // TODO
-    },
-    addUtility: (prefix, _properties, values, responsive = !!config.settings.responsiveUtilities) => {
-      utilities.push({
-        prefix,
-        properties: Array.isArray(_properties) ? _properties : [_properties],
-        values,
-        responsive,
-      })
     },
     tokensForNamespace: (namespace) => {
       return tokens.filter((t) => t.namespace === namespace)

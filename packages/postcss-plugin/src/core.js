@@ -70,11 +70,13 @@ module.exports = (config) => {
         .map(({ name, variableName }) => ({ name, value: `var(${variableName})` }))
     },
     buildTokenCode: ({ Declaration, Rule }) => {
+      if (tokens.length === 0) return ''
       return new Rule({ selector: ':root' }).append(tokens.map((token) => {
         return new Declaration({ prop: token.variableName, value: token.value })
       }))
     },
     buildUtilitiesCode: ({ Declaration, Rule, AtRule }) => {
+      if (utilities.length === 0) return ''
       const utilityStyles = []
       utilities.forEach((utility) => {
         utility.values.forEach((value) => {

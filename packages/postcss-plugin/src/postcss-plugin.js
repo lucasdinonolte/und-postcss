@@ -3,15 +3,7 @@ const path = require('path')
 
 module.exports = (undCss) => {
   undCss.generators.forEach((m) => {
-    if (typeof m.addTokens === 'function') m.addTokens(undCss)
-  })
-
-  undCss.generators.forEach((m) => {
-    if (typeof m.addLayouts === 'function') m.addLayouts(undCss)
-  })
-
-  undCss.generators.forEach((m) => {
-    if (typeof m.addUtilities === 'function') m.addUtilities(undCss)
+    // run each generator
   })
 
   return {
